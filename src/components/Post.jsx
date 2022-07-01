@@ -1,23 +1,26 @@
 import { Autorenew, Close, FavoriteBorder, FavoriteBorderOutlined, Fullscreen, IosShareOutlined, ModeCommentOutlined, More, MoreHorizOutlined } from '@mui/icons-material'
 import { Avatar } from '@mui/material'
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../features/userSlice'
 import PostBtn from './PostBtn'
 
 function Post({name,description,photoUrl,timestamp,groupName}) {
+    const user = useSelector(selectUser);
   return (
     <div className='border pb-2'>
         {/* Post Header */}
         <div className='p-2'>
             <div className='text-white flex items-center pl-4'>
                 <Fullscreen className='cursor-pointer mr-2' />
-                <p className='flex-1'><span className='text-gray-500 cursor-pointer hover:underline'>{groupName}</span> <span className='text-gray-500'>.</span> <span className='text-[#1c9bf0] cursor-pointer hover:underline'>See more</span></p>
+                <p className='flex-1'><span className='text-gray-500 text-sm sm:text-base cursor-pointer hover:underline'>{groupName}</span> <span className='text-gray-500 text-sm sm:text-base'>.</span> <span className='text-[#1c9bf0] text-sm sm:text-base cursor-pointer hover:underline'>See more</span></p>
                 <Close className='cursor-pointer' />
             </div>
             <div className='text-white flex items-center'>
-                <Avatar className='cursor-pointer mr-2' />
+                <Avatar  src={user?.photoUrl} className='cursor-pointer mr-2' />
                 <div className='flex-1 cursor-pointer'>
-                    <p><span className='font-bold cursor-pointer hover:underline'>{name}</span> <span className='text-gray-500'>@{name} .</span> <span className='text-gray-500 hover:underline cursor-pointer'>Date</span></p>
-                    <p>{description}</p>
+                    <p><span className='font-bold text-sm sm:text-base cursor-pointer hover:underline'>{name}</span> <span className='text-gray-500 text-sm sm:text-base'>@{name} .</span> <span className='text-gray-500 text-sm sm:text-base hover:underline cursor-pointer'>{timestamp} min</span></p>
+                    <p className='w-full text-sm sm:text-base truncate'>{description}</p>
                 </div>
                 <MoreHorizOutlined className='cursor-pointer' />
             </div>
